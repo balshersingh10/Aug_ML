@@ -21,7 +21,7 @@ for url in rows:
 		# try to download the image
 		r = requests.get(url, timeout=60)
 		# save the image to disk
-		p = os.path.sep.join([args["output"], "{}.jpg".format(
+		p = os.path.sep.join([args["output"], "{}.jpeg".format(
 			str(total).zfill(8))])
 		f = open(p, "wb")
 		f.write(r.content)
