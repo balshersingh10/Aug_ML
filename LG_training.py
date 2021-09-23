@@ -9,7 +9,6 @@ from tensorflow.keras.layers import Activation, Dense, Dropout, Input, Flatten, 
 from tensorflow.keras.optimizers import Adamax
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.applications.vgg16 import preprocess_input
-#from keras.utils import np_utils
 
 print(tf.config.list_physical_devices('GPU'))
 
@@ -18,6 +17,10 @@ IMG_SIZE = (224,224)
 
 
 data_dir = './data'
+data_dir_list = [x for x in os.listdir(data_dir)]
+num_classes = len(data_dir_list)
+print(num_classes)
+
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
   validation_split=0.1,
@@ -62,7 +65,7 @@ X = Dense(256, activation='relu')(X)
 X = Dense(128, activation='relu')(X)
 X = BatchNormalization()(X)
 X = Dense(64, activation='relu')(X)
-X = Dense(5, activation='softmax')(X)
+X = Dense(num_classes, activation='softmax')(X)
 model = Model(model_vgg16_conv.layers[0].output,X)
 print(model.summary())
 
