@@ -16,6 +16,9 @@ IMG_SIZE = (224,224)
 
 
 data_dir = './data'
+data_dir_list = [x for x in os.listdir(data_dir)]
+num_classes = len(data_dir_list)
+
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
   data_dir,
   validation_split=0.1,
@@ -60,11 +63,21 @@ X = Dense(256, activation='relu')(X)
 X = Dense(128, activation='relu')(X)
 X = BatchNormalization()(X)
 X = Dense(64, activation='relu')(X)
-X = Dense(5, activation='softmax')(X)
+X = Dense(num_classes, activation='softmax')(X)
 model = Model(model_vgg16_conv.layers[0].output,X)
 #print(model.summary())
 
-model.load_weights("ckpt_set1_a/ckpt_17")
+#model.load_weights("ckpt_set1_a/ckpt_17")
+
+initial_learning_rate = 0.01
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+    initial_learning_rate, decay_steps=50, decay_rate=0.96, staircase=False
+)
+
+def loss(labels, logits):
+  return tf.keras.losses.sparse_categorical_crossentropy(labels, logits)
+
+model.compile(optimizer=tf.keras.optimizers.SGD(learning_rate=initial_learning_rate), loss=loss,metrics='accuracy')
 
 # Evaluate the restored model for Train Data
 loss, acc = model.evaluate(normalized_ds, verbose=2)
