@@ -1,3 +1,9 @@
+import sys
+n = len(sys.argv)
+if(n<=1):
+    print("Please provide data directory in arguement")
+    sys.exit()
+
 import os
 #os.environ["CUDA_VISIBLE_DEVICES"]="2,3,4,5"
 import tensorflow as tf
@@ -16,7 +22,7 @@ batch_size = 4
 IMG_SIZE = (224,224)
 
 
-data_dir = './data'
+data_dir = sys.argv[1]
 data_dir_list = [x for x in os.listdir(data_dir)]
 num_classes = len(data_dir_list)
 print(num_classes)

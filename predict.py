@@ -1,3 +1,10 @@
+import sys
+n = len(sys.argv)
+if(n<=1):
+    print("Please provide data directory[ARG 1], test directory[ARG 2] & Checkpoint directory[ARG 3] as arguements")
+    print("Eg: python predict.py ./data ./test ./ckpt_set1/ckpt_9")
+    sys.exit()
+
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 #os.environ["CUDA_VISIBLE_DEVICES"]="2,3,4,5"
@@ -14,7 +21,7 @@ from PIL import Image
 
 #print(tf.config.list_physical_devices('GPU'))
 
-data_dir = './data'
+data_dir = sys.argv[1]
 data_dir_list = [x for x in os.listdir(data_dir)]
 num_classes = len(data_dir_list)
 #print(num_classes)
@@ -35,9 +42,9 @@ X = Dense(num_classes, activation='softmax')(X)
 model = Model(model_vgg16_conv.layers[0].output,X)
 #print(model.summary())
 
-model.load_weights("./ckpt_set1/ckpt_9")
+model.load_weights(sys.argv[3])
 
-test_dir = './test'
+test_dir = sys.argv[2]
 labels = ['car_nitro', 'happy', 'horror']
 
 for image in os.listdir(test_dir):
