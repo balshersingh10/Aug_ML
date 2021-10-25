@@ -1,8 +1,11 @@
 from utils import load_pkl
 import numpy as np
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 import sys
 from PIL import Image
+#tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
 ImgName = sys.argv[1]
 
@@ -28,4 +31,4 @@ features = pretrained_model.predict(arr4d)
 model = tf.keras.models.load_model(model_path, compile=False)
 pred = model.predict(features)
 for i in pred:
-    print(labels[np.argmax(i)])
+    print("Prediction: "+labels[np.argmax(i)])
