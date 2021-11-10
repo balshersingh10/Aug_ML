@@ -36,7 +36,7 @@ def load_pkl(pklName, verbose=True):
 '''
 def load_pkl(pklName, verbose=True):
     if verbose:
-        print ("Loading data from data/{0}.p".format(pklName))
+        print ("Loading data from data/{0}".format(pklName))
     with open(pklName, 'rb') as f:
         u = pickle._Unpickler(f)
         u.encoding = 'latin1'

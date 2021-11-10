@@ -30,30 +30,30 @@ def train_classifier(genres=['romance', 'horror', 'action'], model_name=default_
                 trainingData.append(feature)
                 trainingLabels.append([genreIndex])
     trainingData = np.array(trainingData)
-    dump_pkl(trainingData,"training_data_500.p")
+    dump_pkl(trainingData,"training_data_700")
     trainingLabels = np.array(trainingLabels)
-    dump_pkl(trainingLabels,"training_labels_500.p")
+    dump_pkl(trainingLabels,"training_labels_700")
     print (trainingData.shape)
     print (trainingLabels.shape)
-#    trainingLabels = to_categorical(trainingLabels, num_of_classes)
-    print( trainingLabels)
-#    trainingLabels = trainingLabels.reshape((-1,num_of_classes))
-
-    #"""Initialize the mode"""
-    model = spatial_model(num_of_classes)
-    model.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
-
-    """Start training"""
-    batch_size = 5
-    nb_epoch = 100
-
-    model.fit(trainingData, trainingLabels, batch_size=batch_size, epochs=nb_epoch)#, callbacks=[remote])
-    modelOutPath ='data/models/spatial'+model_name+'_'+str(num_of_classes)+"g_bs"+str(batch_size)+"_ep"+str(nb_epoch)+".h5"
-    model.save(modelOutPath)
-    print( "Model saved at",modelOutPath)
+# #    trainingLabels = to_categorical(trainingLabels, num_of_classes)
+#     print( trainingLabels)
+# #    trainingLabels = trainingLabels.reshape((-1,num_of_classes))
+#
+#     #"""Initialize the mode"""
+#     model = spatial_model(num_of_classes)
+#     model.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+#
+#
+#     """Start training"""
+#     batch_size = 5
+#     nb_epoch = 100
+#
+#     model.fit(trainingData, trainingLabels, batch_size=batch_size, epochs=nb_epoch)#, callbacks=[remote])
+#     modelOutPath ='data/models/spatial'+model_name+'_'+str(num_of_classes)+"g_bs"+str(batch_size)+"_ep"+str(nb_epoch)+".h5"
+#     model.save(modelOutPath)
+#     print( "Model saved at",modelOutPath)
 
 
 if __name__=="__main__":
 
-    train_classifier(genres=['Action','Comedy','Drama','Romance','Thriller'])
+    train_classifier(genres=['Action','Comedy','Drama','Fantasy','Horror_Mystery','Romance','Thriller'])

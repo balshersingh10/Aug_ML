@@ -14,10 +14,9 @@ def gather_training_data(genre, model_name=default_model_name):
 
     trainPath = os.path.join(frame_resource,'genres','train',genre)
     print(trainPath)
-    videoPaths = glob(trainPath+'/*')
+    videoPaths = glob(trainPath+'\*')
     genreFeatures = []
     for videoPath in videoPaths:
-        print(videoPath)
         videoFeatures = load_pkl(videoPath)
         print (videoFeatures.shape)
         genreFeatures.append(videoFeatures)
