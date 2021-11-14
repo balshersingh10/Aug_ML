@@ -9,6 +9,7 @@ dataset_path = "./dataset"
 
 #'Action','Comedy','Drama','Fantasy','Horror_Mystery','Romance','Thriller'
 frames = os.listdir(frame_path)
+#frames = frames[3254:]
 
 for video in frames:
     fromDirectory = os.path.join(frame_path,video)
