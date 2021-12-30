@@ -1,0 +1,14 @@
+Requirements: berTopic.py and history.csv in same folder
+
+Get history.csv file by https://chrome.google.com/webstore/detail/export-chrome-history/dihloblpkeiddiaojbagoecedbfpifdj?hl=en
+
+#Create virtual environment using following link: https://www.geeksforgeeks.org/python-virtual-environment/
+
+pip install keybert
+pip install tokenizers==0.10.3
+pip install umap
+pip install hdbscan
+pip install bertopic
+pip install numba==0.53.1
+pip install bs4
+pip install html5lib
